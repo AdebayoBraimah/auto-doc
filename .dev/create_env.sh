@@ -6,12 +6,15 @@
 #   (installed via Anaconda). The environment is intended to have no default
 #   packages.
 # 
+# USAGE:
+#   cd .dev; ./create_env.sh
 # 
 # NOTE:
+#   * Intended to be run from the main directory level.
 #   * Currently only works with Anaconda.
 #   * Environment setup is for python v3+.
 #   * If using a machine without administrative privileges, use ``--user`` 
-#     flag during the ``pip install`` step.
+#       flag during the ``pip install`` step.
 
 if [[ ! -d ../.env ]]; then
   mkdir -p ../.env
