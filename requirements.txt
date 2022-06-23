@@ -4,4 +4,6 @@ sphinx_rtd_theme
 sphinx-autodoc-napoleon-typehints 
 sphinx-argparse
 myst-parser
-sphinxcontrib-matlabdomain
+myst-parser[linkify]
+sphinx-tabs
+# sphinxcontrib-matlabdomain
