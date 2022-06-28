@@ -20,7 +20,7 @@ You can adapt this file completely to your liking, but it should at least
 contain the root `toctree` directive.
 
 Welcome to {pkg}'s documentation!
-===============================
+==================================
 
 .. toctree::
    :maxdepth: 3
@@ -50,7 +50,7 @@ def _init_index(outdir: str) -> str:
         Index.rst absolute file path.
     """
     with WorkDir(outdir) as od:
-        sourcedir: str = od.join("source")
+        sourcedir: str = od.join("doc", "source")
         with WorkDir(sourcedir) as sd:
             idx: str = sd.join("index.rst")
     return idx
