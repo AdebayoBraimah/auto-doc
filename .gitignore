@@ -1,3 +1,4 @@
 .env/*
 workdir/*
 .vscode/*
+__pycache__
