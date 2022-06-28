@@ -1,10 +1,72 @@
-"""Write sphinx configuration file for automated documentation.
+"""Generate text/information for sphinx configuration file for automated documentation.
 """
+from typing import Dict
+
+from commandio.fileio import File
+from commandio.workdir import WorkDir
 
 
-def conf(
+def write_conf(
+    outdir: str,
+    pkg_path: str,
+    project: str,
+    copyright: str,
+    author: str,
+    release: str,
+    theme: str,
+) -> str:
+    """Writes sphinx configuration information to ``conf.py``.
+
+    Args:
+        outdir: Parent output directory.
+        pkg_path: Package path information.
+        project: Project name.
+        copyright: Copyright information.
+        author: Author name.
+        release: Release/version number/ID.
+        theme: Sphinx theme.
+
+    Returns:
+        Path to sphinx configuration file.
+    """
+    # Helper function args dict
+    conf_args: Dict[str, str] = {
+        "pkg_path": pkg_path,
+        "project": project,
+        "copyright": copyright,
+        "author": author,
+        "release": release,
+        "theme": theme,
+    }
+
+    with WorkDir(outdir) as od:
+        sourcedir: str = od.join("doc", "source")
+        with WorkDir(sourcedir) as sd:
+            conf_file: str = sd.join("conf.py")
+            conf_text: str = _conf_info(**conf_args)
+            with File(conf_file) as cf:
+                cf.write(conf_text)
+    return conf_file
+
+
+def _conf_info(
     pkg_path: str, project: str, copyright: str, author: str, release: str, theme: str
 ) -> str:
+    """Helper function for sphinx configuration file information.
+
+    This function fills in the details for a sphinx ``conf.py`` file.
+
+    Args:
+        pkg_path: Package path information.
+        project: Project name.
+        copyright: Copyright information.
+        author: Author name.
+        release: Release/version number/ID.
+        theme: Sphinx theme.
+
+    Returns:
+        Returns sphinx configuration file text as strings.
+    """
     _CONF_TEXT = f"""# Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
