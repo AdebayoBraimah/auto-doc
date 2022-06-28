@@ -6,4 +6,9 @@ sphinx-argparse
 myst-parser
 myst-parser[linkify]
 sphinx-tabs
+sphinx-inline-tabs
+commandio
+sphinx-rtd-dark-mode
+rst.linker
 # sphinxcontrib-matlabdomain
+
