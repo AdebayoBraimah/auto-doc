@@ -31,7 +31,7 @@ def write_file(
     append_char: Optional[str] = None,
     convert_tabs_to_spaces: bool = False,
     num_spaces: Optional[int] = 4,
-    mode: str = "w",
+    mode: str = "a",
 ) -> None:
     """Writes text to some output file.
 
@@ -43,7 +43,7 @@ def write_file(
         append_char: Characters to be appended to text. Defaults to None.
         convert_tabs_to_spaces: Convert tabs to spaces. Defaults to False.
         num_spaces: Number of spaces to replace tabs with. Only applicable when ``convert_tabs_to_spaces`` is True. Defaults to 4.
-        mode: Opening mode option - arguments are the same as python's built-in ``open`` function. Defaults to "w" (write).
+        mode: Opening mode option - arguments are the same as python's built-in ``open`` function. Defaults to "a" (append).
     """
     if prepend_char is None:
         prepend_char: str = ""
