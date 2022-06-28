@@ -48,6 +48,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_tabs.tabs",
     "sphinx.ext.viewcode",
+    "sphinx-rtd-dark-mode",
 ]
 
 source_suffix = {
