@@ -144,21 +144,3 @@ def spaces2tabs(
     for i, alpha_numerics in enumerate(text):
         text[i] = re.sub(pattern=num_spaces, repl="\t", string=alpha_numerics)
     return text
-
-
-def file_parts(file: str, /) -> Tuple[str, str, str]:
-    """Similar to MATLAB's fileparts function.
-
-    Separates input filename into directory path, filename, and file extension.
-
-    Args:
-        file: Argument only input file name.
-
-    Returns:
-        Tuple of strings that consists of the directory path, filename, and extension.
-    """
-    file: str = os.path.abspath(file)
-    directory, _filename = os.path.split(file)
-    _, ext = os.path.splitext(file)
-    filename: str = _filename[: -len(ext)]
-    return directory, filename, ext

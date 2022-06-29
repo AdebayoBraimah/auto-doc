@@ -1,14 +1,19 @@
 """Module for documenting shell/command line code.
 """
 import os
-from typing import Set
+from typing import Optional, Set
 
 from commandio.fileio import File
 from commandio.workdir import WorkDir
 from autodoc.utils.docshell import document_shell_script, _auto_detect as auto_detect
 
 
-def write_script_docs(pkg_dir: str, outdir: str) -> Set[str]:
+def write_script_docs(
+    pkg_dir: str,
+    outdir: str,
+    convert_tabs_to_spaces: bool = True,
+    num_spaces: Optional[int] = 4,
+) -> Set[str]:
     """Writes reStructered Text files (shell) scripts.
 
     NOTE:
@@ -18,6 +23,8 @@ def write_script_docs(pkg_dir: str, outdir: str) -> Set[str]:
     Args:
         pkg_dir: Path to package/repository.
         outdir: Path to output directory.
+        convert_tabs_to_spaces: Convert tabs to spaces. Defaults to True.
+        num_spaces: Number of spaces to replace tabs with. Only applicable when ``convert_tabs_to_spaces`` is True. Defaults to 4.
 
     Returns:
         Set of strings that corresponds to output  reStructered Text files
@@ -38,8 +45,8 @@ def write_script_docs(pkg_dir: str, outdir: str) -> Set[str]:
                 document_shell_script(
                     file=script,
                     outfile=outfile,
-                    convert_tabs_to_spaces=True,
-                    num_spaces=4,
+                    convert_tabs_to_spaces=convert_tabs_to_spaces,
+                    num_spaces=num_spaces,
                 )
                 rsts.add(outfile)
     return rsts

@@ -4,7 +4,8 @@ import os
 
 from typing import Dict, List, Optional, Union
 
-from autodoc.utils.util import file_parts, read_file, write_file
+from commandio.fileio import File
+from autodoc.utils.util import read_file, write_file
 
 
 def document_shell_script(
@@ -32,7 +33,9 @@ def document_shell_script(
     """
     file: str = os.path.abspath(file)
     script_type: str = _auto_detect(infile=file, encoding=encoding)
-    _, fname, ext = file_parts(file)
+
+    with File(src=file, assert_exists=True) as f:
+        _, fname, ext = f.file_parts()
 
     title: str = f"""{fname}\n~~~~~~~~~~~~~~~~~~~~~~~\n\n"""
     preamble: str = f"""Documentation/code for ``{fname}`` {script_type}{ext} script shown below: \n\n"""
@@ -93,7 +96,9 @@ def _auto_detect(infile: str, encoding: Optional[str] = "utf-8") -> Union[str, N
         File type as a string **OR** None if the file type cannot be inferred.
     """
     infile: str = os.path.abspath(infile)
-    _, _, _ext = file_parts(infile)
+
+    with File(src=infile, assert_exists=True) as f:
+        _, _, _ext = f.file_parts()
 
     # Dictionary of common shebangs
     shell_dict: Dict[str, str] = {
