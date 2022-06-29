@@ -1,6 +1,6 @@
 """Generate text/information for sphinx configuration file for automated documentation.
 """
-from typing import Dict
+from typing import Dict, Optional
 
 from commandio.fileio import File
 from commandio.workdir import WorkDir
@@ -8,23 +8,26 @@ from commandio.workdir import WorkDir
 
 def write_conf(
     outdir: str,
-    pkg_path: str,
-    project: str,
-    copyright: str,
-    author: str,
-    release: str,
-    theme: str,
+    pkg_path: Optional[str] = None,
+    project: Optional[str] = None,
+    copyright: Optional[str] = None,
+    author: Optional[str] = None,
+    release: Optional[str] = None,
+    theme: Optional[str] = None,
 ) -> str:
     """Writes sphinx configuration information to ``conf.py``.
 
+    NOTE:
+        ``pkg_path`` should be the relative path of the package/repository to the document directory.
+
     Args:
         outdir: Parent output directory.
-        pkg_path: Package path information.
-        project: Project name.
-        copyright: Copyright information.
-        author: Author name.
-        release: Release/version number/ID.
-        theme: Sphinx theme.
+        pkg_path: Package path information. Defaults to None.
+        project: Project name. Defaults to None.
+        copyright: Copyright information. Defaults to None.
+        author: Author name. Defaults to None.
+        release: Release/version number/ID. Defaults to None.
+        theme: Sphinx theme. Defaults to None.
 
     Returns:
         Path to sphinx configuration file.
@@ -50,23 +53,38 @@ def write_conf(
 
 
 def _conf_info(
-    pkg_path: str, project: str, copyright: str, author: str, release: str, theme: str
+    pkg_path: Optional[str] = None,
+    project: Optional[str] = None,
+    copyright: Optional[str] = None,
+    author: Optional[str] = None,
+    release: Optional[str] = None,
+    theme: Optional[str] = None,
 ) -> str:
     """Helper function for sphinx configuration file information.
 
     This function fills in the details for a sphinx ``conf.py`` file.
 
+    NOTE:
+        ``pkg_path`` should be the relative path of the package/repository to the document directory.
+
     Args:
-        pkg_path: Package path information.
-        project: Project name.
-        copyright: Copyright information.
-        author: Author name.
-        release: Release/version number/ID.
-        theme: Sphinx theme.
+        pkg_path: Package path information. Defaults to None.
+        project: Project name. Defaults to None.
+        copyright: Copyright information. Defaults to None.
+        author: Author name. Defaults to None.
+        release: Release/version number/ID. Defaults to None.
+        theme: Sphinx theme. Defaults to None.
 
     Returns:
         Returns sphinx configuration file text as strings.
     """
+    # Set NoneType to empty strings
+    kwargs: Dict[str, str] = locals()
+
+    for key, _ in kwargs.items():
+        if kwargs.get(key) is None:
+            kwargs[key] = ""
+
     _CONF_TEXT = f"""# Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
