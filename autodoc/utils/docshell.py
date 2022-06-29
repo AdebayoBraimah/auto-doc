@@ -2,7 +2,7 @@
 """
 import os
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 from util import file_parts, read_file, write_file
 
@@ -82,15 +82,15 @@ def document_shell_script(
     return None
 
 
-def _auto_detect(infile: str, encoding: Optional[str] = "utf-8") -> str:
-    """Auto-detects input file type (e.g. bash/shell, ruby, perl script) and returns the shell/file type.
+def _auto_detect(infile: str, encoding: Optional[str] = "utf-8") -> Union[str, None]:
+    """Helper function that auto-detects input file type (e.g. bash/shell, ruby, perl script) and returns the shell/file type.
 
     Args:
         infile: Input file.
         encoding: Encoding standard. Defaults to "utf-8".
 
     Returns:
-        File type as a string.
+        File type as a string **OR** None if the file type cannot be inferred.
     """
     infile: str = os.path.abspath(infile)
     _, _, _ext = file_parts(infile)
@@ -125,3 +125,4 @@ def _auto_detect(infile: str, encoding: Optional[str] = "utf-8") -> str:
     for shebang in _shebangs:
         if shebang in text[0]:
             return shebang
+    return None
