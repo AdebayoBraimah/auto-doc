@@ -4,7 +4,7 @@ import os
 
 from typing import Dict, List, Optional, Union
 
-from util import file_parts, read_file, write_file
+from autodoc.utils.util import file_parts, read_file, write_file
 
 
 def document_shell_script(
