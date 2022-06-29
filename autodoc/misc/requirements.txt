@@ -1,14 +1,15 @@
+# Sphinx/rST dependencies
 sphinx 
 sphinx-autodoc-typehints 
 sphinx_rtd_theme 
 sphinx-autodoc-napoleon-typehints 
 sphinx-argparse
-myst-parser
-myst-parser[linkify]
 sphinx-tabs
 sphinx-inline-tabs
-commandio
 sphinx-rtd-dark-mode
 rst.linker
 # sphinxcontrib-matlabdomain
 
+# Markdown dependences
+myst-parser
+myst-parser[linkify]
