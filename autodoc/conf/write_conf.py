@@ -18,7 +18,8 @@ def write_conf(
     """Writes sphinx configuration information to ``conf.py``.
 
     NOTE:
-        ``pkg_path`` should be the relative path of the package/repository to the document directory.
+        * ``pkg_path`` should be the relative path of the package/repository to the document directory.
+        * ``out_dir`` is assumed to be the main/parent directory of the repository.
 
     Args:
         outdir: Parent output directory.

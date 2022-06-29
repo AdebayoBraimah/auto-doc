@@ -8,6 +8,9 @@ from commandio.workdir import WorkDir
 def sphinx_apidoc(outdir: str, pkg_path: str) -> None:
     """Wrapper function for ``sphinx-apidoc``.
 
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
+
     Args:
         outdir: Output parent directory.
         pkg_path: Package path.

@@ -8,6 +8,9 @@ from autodoc.utils.util import write_file
 def write_index(outdir: str, pkg: str) -> str:
     """Creates index.rst file for sphinx.
 
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
+
     Args:
         outdir: Output parent directory.
         pkg: Package name.
@@ -42,6 +45,9 @@ Indices and tables
 
 def _init_index(outdir: str) -> str:
     """Helper function that creates index.rst file for sphinx.
+
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
 
     Args:
         outdir: Output parent directory.

@@ -10,6 +10,9 @@ from commandio.workdir import WorkDir
 def setup_make_file(outdir: str) -> Tuple[str, str]:
     """Copies make file templates (for both UNIX and Windows) for sphinx documentation.
 
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
+
     Args:
         outdir: Output parent directory.
 

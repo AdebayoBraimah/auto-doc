@@ -17,6 +17,9 @@ def conf_setup(
 ) -> str:
     """Sets up source directory structure and writes sphinx configuration file.
 
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
+
     Args:
         outdir: Parent output directory.
         pkg_path: Package path information.
@@ -46,6 +49,9 @@ def conf_setup(
 
 def _doc_dir_setup(outdir: str) -> None:
     """Helper function to set up docuemnt source sub-directories.
+
+    NOTE:
+        ``out_dir`` is assumed to be the main/parent directory of the repository.
 
     Args:
         outdir: Output parent directory.
