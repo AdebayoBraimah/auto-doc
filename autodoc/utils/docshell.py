@@ -2,7 +2,7 @@
 """
 import os
 
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional, Set, Union
 
 from commandio.fileio import File
 from autodoc.utils.util import read_file, write_file
@@ -125,9 +125,12 @@ def _auto_detect(infile: str, encoding: Optional[str] = "utf-8") -> Union[str, N
     #   shebang.
     text: List[str] = read_file(infile, encoding=encoding)
 
-    _shebangs: List[str] = ["bash", "zsh", "ruby", "perl"]
+    _shebangs: Set[str] = {"bash", "zsh", "ruby", "perl"}
 
     for shebang in _shebangs:
-        if shebang in text[0]:
-            return shebang
+        try:
+            if shebang in text[0]:
+                return shebang
+        except IndexError:
+            return None
     return None

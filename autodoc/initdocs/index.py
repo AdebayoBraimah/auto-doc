@@ -1,5 +1,6 @@
 """Creates index.rst files for sphinx documentation.
 """
+import os
 
 from commandio.workdir import WorkDir
 from autodoc.utils.util import write_file
@@ -18,7 +19,7 @@ def write_index(outdir: str, pkg: str) -> str:
     Returns:
         Index.rst absolute file path.
     """
-    _IDX_TEXT: str = f""".. {pkg} documentation master file.
+    _IDX_TEXT: str = f""".. {pkg} documentation main file.
 You can adapt this file completely to your liking, but it should at least
 contain the root `toctree` directive.
 
@@ -39,7 +40,12 @@ Indices and tables
     """
 
     idx: str = _init_index(outdir=outdir)
-    write_file(idx, text=_IDX_TEXT, num_spaces=4, mode="a")
+
+    if not os.path.exists(idx):
+        write_file(idx, text=_IDX_TEXT, num_spaces=4, mode="a")
+    else:
+        print(f"\n{idx}: Already exists in output directory.\n")
+
     return idx
 
 

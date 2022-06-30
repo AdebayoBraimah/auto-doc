@@ -42,12 +42,18 @@ def write_script_docs(
                     _, fname, _ = scr.file_parts()
                     outfile: str = sd.join(f"{fname}.rst")
 
-                document_shell_script(
-                    file=script,
-                    outfile=outfile,
-                    convert_tabs_to_spaces=convert_tabs_to_spaces,
-                    num_spaces=num_spaces,
-                )
+                if not os.path.exists(outfile):
+                    document_shell_script(
+                        file=script,
+                        outfile=outfile,
+                        convert_tabs_to_spaces=convert_tabs_to_spaces,
+                        num_spaces=num_spaces,
+                    )
+                else:
+                    print(
+                        f"\n{fname}: Script documentation already exists. Remove {outfile} if script/code documentation needs to be updated.\n"
+                    )
+
                 rsts.add(outfile)
     return rsts
 

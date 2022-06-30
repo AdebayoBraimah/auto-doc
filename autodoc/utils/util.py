@@ -17,8 +17,13 @@ def read_file(infile: str, /, encoding: Optional[str] = "utf-8") -> List[str]:
         List of strings.
     """
     infile: str = os.path.abspath(infile)
-    with open(infile, mode="r", encoding=encoding) as f:
-        contents: List[str] = f.readlines()
+
+    try:
+        with open(infile, mode="r", encoding=encoding) as f:
+            contents: List[str] = f.readlines()
+    except UnicodeDecodeError:
+        contents: List[str] = []
+
     return contents
 
 

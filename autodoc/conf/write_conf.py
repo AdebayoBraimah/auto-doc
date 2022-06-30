@@ -1,5 +1,6 @@
 """Generate text/information for sphinx configuration file for automated documentation.
 """
+import os
 from typing import Dict, Optional
 
 from commandio.fileio import File
@@ -47,9 +48,14 @@ def write_conf(
         sourcedir: str = od.join("doc", "source")
         with WorkDir(sourcedir) as sd:
             conf_file: str = sd.join("conf.py")
-            conf_text: str = _conf_info(**conf_args)
-            with File(conf_file) as cf:
-                cf.write(conf_text)
+
+            if not os.path.exists(conf_file):
+                conf_text: str = _conf_info(**conf_args)
+                with File(conf_file) as cf:
+                    cf.write(conf_text)
+            else:
+                print(f"\n{conf_file}: Already exists in output directory.")
+
     return conf_file
 
 
@@ -80,11 +86,23 @@ def _conf_info(
         Returns sphinx configuration file text as strings.
     """
     # Set NoneType to empty strings
-    kwargs: Dict[str, str] = locals()
+    if pkg_path is None:
+        pkg_path: str = ""
 
-    for key, _ in kwargs.items():
-        if kwargs.get(key) is None:
-            kwargs[key] = ""
+    if project is None:
+        project: str = ""
+
+    if copyright is None:
+        copyright: str = ""
+
+    if author is None:
+        author: str = ""
+
+    if release is None:
+        release: str = ""
+
+    if theme is None:
+        theme: str = ""
 
     _CONF_TEXT = f"""# Configuration file for the Sphinx documentation builder.
 #
@@ -132,11 +150,11 @@ extensions = [
     "sphinx-rtd-dark-mode",
 ]
 
-source_suffix = {
+source_suffix = {{
     ".rst": "restructuredtext",
     ".txt": "markdown",
     ".md": "markdown",
-}
+}}
 
 myst_enable_extensions = [
     "amsmath",
