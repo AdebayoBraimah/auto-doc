@@ -2,11 +2,15 @@
 """Python package that wraps ``sphinx`` documentation package for creating HTML documentation.
 """
 import os
+import pathlib
+
 from typing import List
 
 name: str = "auto-doc"
 
-_MISCDIR: str = os.path.abspath("misc")
+_pkg_path: str = os.path.join(str(pathlib.Path(os.path.abspath(__file__)).parents[0]))
+
+_MISCDIR: str = os.path.abspath(os.path.join(_pkg_path, "misc"))
 
 _version_file: str = os.path.abspath(os.path.join(_MISCDIR, "version.txt"))
 
