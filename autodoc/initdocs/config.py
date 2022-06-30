@@ -1,6 +1,6 @@
 """Configuration file and documentation setup.
 """
-from typing import Dict
+from typing import Optional, Dict
 from commandio.workdir import WorkDir
 
 from autodoc.conf.write_conf import write_conf
@@ -9,11 +9,11 @@ from autodoc.conf.write_conf import write_conf
 def conf_setup(
     outdir: str,
     pkg_path: str,
-    project: str,
-    copyright: str,
-    author: str,
-    release: str,
-    theme: str,
+    project: Optional[str] = None,
+    copyright: Optional[str] = None,
+    author: Optional[str] = None,
+    release: Optional[str] = None,
+    theme: Optional[str] = None,
 ) -> str:
     """Sets up source directory structure and writes sphinx configuration file.
 
@@ -23,11 +23,11 @@ def conf_setup(
     Args:
         outdir: Parent output directory.
         pkg_path: Package path information.
-        project: Project name.
-        copyright: Copyright information.
-        author: Author name.
-        release: Release/version number/ID.
-        theme: Sphinx theme.
+        project: Project name. Defaults to None.
+        copyright: Copyright information. Defaults to None.
+        author: Author name. Defaults to None.
+        release: Release/version number/ID. Defaults to None.
+        theme: Sphinx theme. Defaults to None.
 
     Returns:
         Path to sphinx configuration file.
@@ -60,7 +60,7 @@ def _doc_dir_setup(outdir: str) -> None:
         _static: str = od.join("doc", "source", "_static")
         _template: str = od.join("doc", "source", "_template")
 
-        with WorkDir(_static) as sd:
-            with WorkDir(_template) as td:
+        with WorkDir(_static) as _:
+            with WorkDir(_template) as _:
                 # WorkDir class creates these directories
                 pass
